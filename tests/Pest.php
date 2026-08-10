@@ -15,7 +15,10 @@ use Tests\TestCase;
 */
 
 pest()->extend(TestCase::class)
- // ->use(RefreshDatabase::class)
+    ->use(RefreshDatabase::class)
+    ->beforeEach(function () {
+        $this->seed(\Database\Seeders\RoleSeeder::class);
+    })
     ->in('Feature');
 
 /*

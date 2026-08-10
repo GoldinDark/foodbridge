@@ -2,24 +2,28 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Claim;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // User::factory(10)->create();
+        $this->call([
+        RoleSeeder::class,
+        PermissionSeeder::class,
+        UserSeeder::class,
+        CategorySeeder::class,
+        RestaurantSeeder::class,
+        FoodSeeder::class,
+        BadgeSeeder::class,
+    ]);
 
-        User::factory()->create([
-            'name' => 'Test User',
-            'email' => 'test@example.com',
-        ]);
+        // Buat review HANYA untuk claim yang statusnya sudah completed
+        Claim::where('status', 'completed')->get()->each(function ($claim) {
+            \App\Models\Review::factory()->create([
+                'claim_id' => $claim->id,
+            ]);
+        });
     }
 }

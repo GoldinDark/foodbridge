@@ -7,3 +7,11 @@
     --font-sans: 'Instrument Sans', ui-sans-serif, system-ui, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji',
         'Segoe UI Symbol', 'Noto Color Emoji';
 }
+
+@layer base {
+    a, button {
+        transition-property: color, background-color, border-color, opacity, transform;
+        transition-duration: 200ms;
+        transition-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+    }
+}
